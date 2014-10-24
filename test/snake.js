@@ -6,27 +6,28 @@ var context;
 var screenWidth;
 var screenHeight;
 
-gameInitialize();
-snakeInitialize();
-gameDraw();
-snakeDraw();
+//gameInitialize();
+//snakeInitialize();
 
 function gameInitialize () {
     var canvas = document.getElementById("game-screen");
-    canvas = canvas.getContext("2d");
+    context = canvas.getContext("2d");
     
     screenWidth = window.innerWidth;
     screenHeight = window.innerHeight;
     
-    canvis.width = screenWidth;
-    canvis.height = screenHeight;
+    canvas.width = screenWidth;
+    canvas.height = screenHeight;
 }
     
 function gameloop () {
-    
+        
+    snakeDraw();
+    snakeUpdate();    
+    snakeDraw();
 }
 
-function gamedraw () {
+function gameDraw () {
     context.fillStyle = "rgb (58 , 45 ,168)";
     context.fillRect (0 ,0 ,screenWidth, screenHeight);
 }

@@ -13,14 +13,14 @@ function gameInitialize () {
     screenWidth = window.innerWidth;
     screenHeight = window.innerHeight;
     
-    canvis.width = screenWidth;
-    canvis.height = screenHeight;
+    canvas.width = screenWidth;
+    canvas.height = screenHeight;
     }
 function gameloop () {
     
 }
 
-function gamedraw () {
+function gameDraw () {
     context.fillStyle = "rgb (58 , 45 ,168)";
     context.fillRect (0 ,0 ,screenWidth, screenHeight);
 }
