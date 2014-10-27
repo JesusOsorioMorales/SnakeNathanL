@@ -6,6 +6,13 @@ var context;
 var screenWidth;
 var screenHeight;
 
+gameInitialize();
+sankeInitialize();
+gameDraw();
+snakeDraw();
+snakeUpdate();
+snakeDraw();
+
 //gameInitialize();
 //snakeInitialize();
 
@@ -24,7 +31,7 @@ function gameloop () {
         
     snakeDraw();
     snakeUpdate();    
-    snakeDraw();
+    snakeDraw(); 
 }
 
 function gameDraw () {
