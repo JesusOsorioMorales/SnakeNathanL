@@ -21,9 +21,6 @@ var snakeDirection;
 
 gameInitialize();
 snakeInitialize();
-gameDraw();
-snakeDraw();
-snakeUpdate();
 foodInitialize();
 setInterval(gameloop, 1000/30);
 
@@ -38,7 +35,7 @@ setInterval(gameloop, 1000/30);
 function gameInitialize () {
     var canvas = document.getElementById("game-screen");
     context = canvas.getContext("2d");
-    
+     
     screenWidth = window.innerWidth;
     screenHeight = window.innerHeight;
     
@@ -50,15 +47,16 @@ function gameInitialize () {
     
 function gameloop () {
         
-    snakeDraw();
+    gameDraw();
     snakeUpdate();    
     snakeDraw(); 
     foodDraw();
 }
 
 function gameDraw () {
-    context.fillStyle = "rgb (58 , 45 ,168)";
-    context.fillRect (0 ,0 ,screenWidth, screenHeight);
+    context.fillStyle = "rgb(58 , 45 ,162)";
+    //context.fillStyle = "green";
+    context.fillRect(0 ,0 ,screenWidth, screenHeight);
 }
 
 /*------------------------------------------------------------------------------
@@ -71,9 +69,9 @@ function snakeInitialize ()  {
     snake = [];  
     snakeLength = 1;
     snakeSize = 20; 
-    snakeDirection = "right";
+    snakeDirection = "down";
     
-    for(var index = 0; index < snakeLength; index++ ) {
+    for(var index = snakeLength - 1; index >= 0; index--) {
         snake.push({
             x: index,
             y:0
@@ -85,7 +83,7 @@ function snakeInitialize ()  {
 
 function snakeDraw () {
      for(var index = 0; index < snake.length; index++ ) {
-        context.fillStyle = "white";
+        context.fillStyle = "red";
         context.fillRect(snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
     }
 }
@@ -95,11 +93,10 @@ function snakeUpdate (){
     var snakeHeadX = snake[0].x;
     var snakeHeadY = snake[0].y;
     
-    if(snakeDirection === "down") {
+    if(snakeDirection == "down") {
         snakeHeadY++;
-    }
-    
-    else {
+    }    
+    else if (snakeDirection == "right") {
         snakeHeadX++;
     }
     
@@ -120,7 +117,8 @@ function foodInitialize()  {
 }
 
 function foodDraw()  {
-    context.fillStyle = "white";
+    console.log("foodDraw");
+    context.fillStyle = "gold";
     context.fillRect(food.x, food.y, snakeSize, snakeSize);
 }
 
@@ -128,8 +126,8 @@ function setFoodPosition() {
     var randomX = Math.floor (Math.random() * screenWidth) + 0;
     var randomY = Math.floor (Math.random() * screenHeight);
     
-    food.x = randomX;
-    food.y = randomY;
+    food.x = Math.floor (randomX / snakeSize);
+    food.y = Math.floor (randomY / snakeSize);
 }
 /*------------------------------------------------------------------------------
  * input Functions
@@ -140,7 +138,10 @@ function keyBoardHandler(event) {
     console.log(event);
     
     
-   if(event.keyCode == "63") {
+   if(event.keyCode == "39") {
        snakeDirection = "right";
+   }
+   else if(event.keycode == "40") {
+       snakeDirection = "down";
    }
 }
