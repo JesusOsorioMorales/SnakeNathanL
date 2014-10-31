@@ -96,9 +96,18 @@ function snakeUpdate (){
     if(snakeDirection == "down") {
         snakeHeadY++;
     }    
+
     else if (snakeDirection == "right") {
         snakeHeadX++;
     }
+      if(snakeDirection == "up") {
+        snakeHeadY++;
+    }    
+     else if (snakeDirection == "left") {
+        snakeHeadX++;
+    }
+    
+    //checkFoodCollisions();
     
     var snakeTail = snake.pop();
     snakeTail.x = snakeHeadX;
@@ -106,7 +115,10 @@ function snakeUpdate (){
     snake.unshift(snakeTail);
     
 }
-
+/*------------------------------------------------------------------------------
+ * Food Function
+ *------------------------------------------------------------------------------
+ */
 function foodInitialize()  {
     food = {
         x:0,
@@ -119,7 +131,7 @@ function foodInitialize()  {
 function foodDraw()  {
     console.log("foodDraw");
     context.fillStyle = "gold";
-    context.fillRect(food.x, food.y, snakeSize, snakeSize);
+    context.fillRect(food.x*snakeSize, food.y*snakeSize, snakeSize, snakeSize);
 }
 
 function setFoodPosition() {
@@ -138,10 +150,16 @@ function keyBoardHandler(event) {
     console.log(event);
     
     
-   if(event.keyCode == "39") {
+   if(event.keyCode == "39" && snakeDirection !="left") {
        snakeDirection = "right";
    }
-   else if(event.keycode == "40") {
+   else if(event.keycode == "40" && snakeDirection !="up") {
        snakeDirection = "down";
+   }
+   if(event.keyCode == "39" && snakeDirection !="right") {
+       snakeDirection = "left";
+   }
+   else if(event.keycode == "40" && snakeDirection !="down") {
+       snakeDirection = "up";
    }
 }
